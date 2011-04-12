@@ -11,17 +11,16 @@ namespace Project1.StepDefinitions
     [Binding]
     public class BaseStepDefinitions
     {
-        private const string CurrentPageKey = "Current.Page";
         public static IWebDriver Driver { get; set; }
-        protected GoogleHomePageModel GoogleHomePage
+
+        protected T Use<T>()
         {
-            get { return (GoogleHomePageModel)ScenarioContext.Current[CurrentPageKey]; }
-            set { ScenarioContext.Current[CurrentPageKey] = value; }
+            return (T)ScenarioContext.Current[typeof(T).Name];
         }
-        protected GoogleSearchResultsPageModel GoogleSearchResultsPage
+
+        protected void Create<T>(T page)
         {
-            get { return (GoogleSearchResultsPageModel)ScenarioContext.Current[CurrentPageKey]; }
-            set { ScenarioContext.Current[CurrentPageKey] = value; }
+            ScenarioContext.Current[typeof(T).Name] = page;
         }
     }
 }
